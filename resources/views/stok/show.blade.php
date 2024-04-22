@@ -1,4 +1,5 @@
-@extends('layouts.template')
+@extends('layout.template')
+
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
@@ -14,24 +15,20 @@
         @else
         <table class="table table-bordered table-striped table-hover table-sm">
             <tr>
-                <th>ID</th>
-                <td>{{ $stok->stok_id }}</td>
+                <th>Barang</th>
+                <td>{{ $stok->barang->barang_nama }}</td>
             </tr>
             <tr>
                 <th>User</th>
                 <td>{{ $stok->user->nama }}</td>
             </tr>
             <tr>
-                <th>Barang</th>
-                <td>{{ $stok->barang->barang_nama }}</td>
+                <th>Tanggal Stok</th>
+                <td>{{ $stok->stok_tanggal }}</td>
             </tr>
             <tr>
                 <th>Jumlah Stok</th>
                 <td>{{ $stok->stok_jumlah }}</td>
-            </tr>
-            <tr>
-                <th>Tanggal Stok</th>
-                <td>{{ $stok->stok_tanggal }}</td>
             </tr>
         </table>
         @endempty
@@ -39,7 +36,9 @@
     </div>
 </div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
 @endpush

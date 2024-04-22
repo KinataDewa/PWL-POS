@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -10,81 +11,91 @@ class BarangSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
+        //
         $data = [
             [
+                'barang_id' => 1,
                 'kategori_id' => 1,
-                'barang_kode' => 'BRG001',
-                'barang_nama' => 'Laptop',
-                'harga_beli' => 5000000,
-                'harga_jual' => 7000000,
+                'barang_kode' => 'B01',
+                'barang_nama' => 'Lays',
+                'harga_beli' => 8000,
+                'harga_jual' => 10000,
             ],
             [
+                'barang_id' => 2,
                 'kategori_id' => 2,
-                'barang_kode' => 'BRG002',
-                'barang_nama' => 'Kemeja',
-                'harga_beli' => 150000,
+                'barang_kode' => 'B02',
+                'barang_nama' => 'Nutriboost',
+                'harga_beli' => 5000,
+                'harga_jual' => 7000,
+            ],
+            [
+                'barang_id' => 3,
+                'kategori_id' => 3,
+                'barang_kode' => 'B03',
+                'barang_nama' => 'T-Shirt Uniqlo',
+                'harga_beli' => 200000,
                 'harga_jual' => 250000,
             ],
             [
-                'kategori_id' => 3,
-                'barang_kode' => 'BRG003',
-                'barang_nama' => 'Nasi Goreng',
-                'harga_beli' => 20000,
-                'harga_jual' => 30000,
+                'barang_id' => 4,
+                'kategori_id' => 4,
+                'barang_kode' => 'B04',
+                'barang_nama' => 'Gundam',
+                'harga_beli' => 300000,
+                'harga_jual' => 350000,
             ],
             [
-                'kategori_id' => 4,
-                'barang_kode' => 'BRG004',
-                'barang_nama' => 'Air Mineral',
+                'barang_id' => 5,
+                'kategori_id' => 5,
+                'barang_kode' => 'B05',
+                'barang_nama' => 'TWS',
+                'harga_beli' => 280000,
+                'harga_jual' => 300000,
+            ],
+            [
+                'barang_id' => 6,
+                'kategori_id' => 1,
+                'barang_kode' => 'B06',
+                'barang_nama' => 'Chitato',
+                'harga_beli' => 8000,
+                'harga_jual' => 11000,
+            ],
+            [
+                'barang_id' => 7,
+                'kategori_id' => 2,
+                'barang_kode' => 'B07',
+                'barang_nama' => 'Freshtea',
                 'harga_beli' => 5000,
                 'harga_jual' => 8000,
             ],
             [
-                'kategori_id' => 5,
-                'barang_kode' => 'BRG005',
-                'barang_nama' => 'Pensil',
-                'harga_beli' => 2000,
-                'harga_jual' => 3000,
-            ],
-            [
-                'kategori_id' => 1,
-                'barang_kode' => 'BRG006',
-                'barang_nama' => 'Smartphone',
-                'harga_beli' => 3000000,
-                'harga_jual' => 4000000,
-            ],
-            [
-                'kategori_id' => 2,
-                'barang_kode' => 'BRG007',
-                'barang_nama' => 'Jeans',
-                'harga_beli' => 200000,
-                'harga_jual' => 350000,
-            ],
-            [
+                'barang_id' => 8,
                 'kategori_id' => 3,
-                'barang_kode' => 'BRG008',
-                'barang_nama' => 'Soto Ayam',
-                'harga_beli' => 25000,
-                'harga_jual' => 35000,
+                'barang_kode' => 'B08',
+                'barang_nama' => 'Hoodie H&M',
+                'harga_beli' => 450000,
+                'harga_jual' => 500000,
             ],
             [
+                'barang_id' => 9,
                 'kategori_id' => 4,
-                'barang_kode' => 'BRG009',
-                'barang_nama' => 'Es Teh',
-                'harga_beli' => 7000,
-                'harga_jual' => 10000,
+                'barang_kode' => 'B09',
+                'barang_nama' => 'Hotwheels',
+                'harga_beli' => 45000,
+                'harga_jual' => 50000,
             ],
             [
+                'barang_id' => 10,
                 'kategori_id' => 5,
-                'barang_kode' => 'BRG010',
-                'barang_nama' => 'Buku Tulis',
-                'harga_beli' => 3000,
-                'harga_jual' => 5000,
+                'barang_kode' => 'B10',
+                'barang_nama' => 'Speaker',
+                'harga_beli' => 250000,
+                'harga_jual' => 300000,
             ],
         ];
-
         DB::table('m_barang')->insert($data);
     }
 }

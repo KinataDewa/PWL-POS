@@ -2,12 +2,15 @@
 
 namespace App\DataTables;
 
+use App\Models\User;
 use App\Models\UserModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class UserDataTable extends DataTable
@@ -20,17 +23,10 @@ class UserDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function ($data) {
-                return '<div class="d-flex gap-1">
-                        <a href="' . route('user.edit', $data->user_id) . '" class="btn btn-warning" style="width: 40px; height: 40px;">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <form action="' . route('user.destroy', $data->user_id) . '" method="POST" style="display: inline;">
-                            ' . csrf_field() . '
-                            ' . method_field('DELETE') . '
-                            <button type="submit" class="btn btn-danger" style="width: 40px; height: 40px;"><i class="fas fa-trash"></i></button>
-                        </form>
-                    </div>';
+            ->addColumn('action', function ($user) {
+                return '<a href="' . route('/user/edit', ['id' => $user->user_id]) . '" class="btn btn-primary mr-2">
+                <i class="fa fa-pencil-alt" style="color: white; font-size: 12px;"></i>
+                </a>';
             })
             ->setRowId('id');
     }
@@ -52,7 +48,7 @@ class UserDataTable extends DataTable
             ->setTableId('user-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-        //->dom('Bfrtip')
+            //->dom('Bfrtip')
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
@@ -61,8 +57,7 @@ class UserDataTable extends DataTable
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload'),
-                Button::make('add'),
+                Button::make('reload')
             ]);
     }
 
@@ -72,16 +67,15 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+
             Column::make('user_id'),
-            Column::make('level_id'),
             Column::make('username'),
             Column::make('nama'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('level_id'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(60)
+                ->width(200)
                 ->addClass('text-center'),
         ];
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LevelModel;
-use App\Models\UserModel;
+use App\Models\m_user;
 use Illuminate\Http\Request;
 
 class POSController extends Controller
@@ -13,8 +13,8 @@ class POSController extends Controller
      */
     public function index()
     {
-        $useri = UserModel::with('level')->get();
-        return view('user.index', compact('useri'))->with('i');
+        $useri = m_user::all(); // Mengambil semua isi tabel 
+        return view('m_user.index', compact('useri'))->with('i');
     }
 
     /**
@@ -22,8 +22,8 @@ class POSController extends Controller
      */
     public function create()
     {
-        $levels = LevelModel::all();
-        return view('user.create', ['levels' => $levels]);
+        $level = LevelModel::all();
+        return view('m_user.create', compact('level'));
     }
 
     /**
@@ -36,18 +36,19 @@ class POSController extends Controller
             'username' => 'required',
             'nama' => 'required',
         ]);
+        m_user::create($request->all());
 
-        UserModel::create($request->all());
-        return redirect()->route('user.index')->with('success', 'User Berhasil Ditambahkan');
+        return redirect()->route('m_user.index')
+            ->with('success', 'user Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, m_user $useri)
     {
-        $useri = UserModel::findOrFail($id);
-        return view('user.show', compact('useri'));
+        $useri = m_user::findOrFail($id);
+        return view('m_user.show', compact('useri'));
     }
 
     /**
@@ -55,9 +56,8 @@ class POSController extends Controller
      */
     public function edit(string $id)
     {
-        $levels = LevelModel::all();
-        $useri = UserModel::find($id);
-        return view('user.edit', compact('useri'), ['levels' => $levels]);
+        $useri = m_user::find($id);
+        return view('m_user.edit', compact('useri'));
     }
 
     /**
@@ -66,13 +66,14 @@ class POSController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'username' => 'required',
-            'nama' => 'required',
-            'password' => 'required',
-        ]);
 
-        UserModel::find($id)->update($request->all());
-        return redirect()->route('user.index')->with('success', 'Data Berhasil Diupdate');
+            'username' => 'required', 'nama' => 'required', 'password' => 'required',
+        ]);
+        //fungsi eloquent untuk mengupdate data inputan kita 
+        m_user::find($id)->update($request->all());
+        //jika data berhasil diupdate, akan kembali ke halaman utama 
+        return redirect()->route('m_user.index')
+            ->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -80,9 +81,9 @@ class POSController extends Controller
      */
     public function destroy(string $id)
     {
-        $useri = UserModel::findOrFail($id)->delete();
-        return \redirect()->route('user.index')
+        $useri = m_user::findOrFail($id)->delete();
+        return \redirect()->route('m_user.index')
+
             ->with('success', 'data Berhasil Dihapus');
     }
-
 }

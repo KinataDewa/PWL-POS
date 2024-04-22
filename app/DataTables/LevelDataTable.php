@@ -3,11 +3,14 @@
 namespace App\DataTables;
 
 use App\Models\LevelModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class LevelDataTable extends DataTable
@@ -20,17 +23,10 @@ class LevelDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function ($data) {
-                return '<div class="d-flex gap-1">
-                        <a href="' . route('level.edit', $data->level_id) . '" class="btn btn-warning" style="width: 40px; height: 40px;">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <form action="' . route('level.destroy', $data->level_id) . '" method="POST" style="display: inline;">
-                            ' . csrf_field() . '
-                            ' . method_field('DELETE') . '
-                            <button type="submit" class="btn btn-danger" style="width: 40px; height: 40px;"><i class="fas fa-trash"></i></button>
-                        </form>
-                    </div>';
+            ->addColumn('action', function ($level) {
+                return '<a href="' . route('/level/edit', ['id' => $level->level_id]) . '" class="btn btn-primary mr-2">
+                <i class="fa fa-pencil-alt" style="color: white; font-size: 12px;"></i>
+                </a>';
             })
             ->setRowId('id');
     }
@@ -49,10 +45,10 @@ class LevelDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('level-table')
+            ->setTableId('user-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-        //->dom('Bfrtip')
+            //->dom('Bfrtip')
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
@@ -61,8 +57,7 @@ class LevelDataTable extends DataTable
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload'),
-                Button::make('add'),
+                Button::make('reload')
             ]);
     }
 
@@ -72,15 +67,14 @@ class LevelDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+
             Column::make('level_id'),
             Column::make('level_kode'),
             Column::make('level_nama'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(60)
+                ->width(200)
                 ->addClass('text-center'),
         ];
     }

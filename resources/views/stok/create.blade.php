@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layout.template')
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
@@ -37,16 +37,6 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label">Jumlah Stok</label>
-                <div class="col-11">
-                    <input type="text" class="form-control" id="stok_jumlah" name="stok_jumlah"
-                        value="{{ old('stok_jumlah') }}" required>
-                    @error('stok_jumlah')
-                    <small class="form-text text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-1 control-label col-form-label">Tanggal Stok</label>
                 <div class="col-11">
                     <input type="datetime-local" class="form-control" id="stok_tanggal" name="stok_tanggal"
@@ -56,7 +46,16 @@
                     @enderror
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label class="col-1 control-label col-form-label">Jumlah Stok</label>
+                <div class="col-11">
+                    <input type="number" class="form-control" id="stok_jumlah" name="stok_jumlah"
+                        value="{{ old('stok_jumlah') }}" required>
+                    @error('stok_jumlah')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
             <div class="form-group row">
                 <label class="col-1 control-label col-form-label"></label>
                 <div class="col-11">
@@ -68,7 +67,9 @@
     </div>
 </div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
 @endpush

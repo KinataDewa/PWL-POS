@@ -1,4 +1,5 @@
-@extends('layouts.template')
+@extends('layout.template')
+
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
@@ -18,16 +19,16 @@
                 <td>{{ $barang->barang_id }}</td>
             </tr>
             <tr>
-                <th>Kategori</th>
-                <td>{{ $barang->kategori->kategori_nama }}</td>
-            </tr>
-            <tr>
-                <th>Barang Kode</th>
+                <th>Kode</th>
                 <td>{{ $barang->barang_kode }}</td>
             </tr>
             <tr>
-                <th>Barang Nama</th>
+                <th>Nama</th>
                 <td>{{ $barang->barang_nama }}</td>
+            </tr>
+            <tr>
+                <th>Kategori</th>
+                <td>{{ $barang->kategori->kategori_nama }}</td>
             </tr>
             <tr>
                 <th>Harga Beli</th>
@@ -43,7 +44,9 @@
     </div>
 </div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
 @endpush

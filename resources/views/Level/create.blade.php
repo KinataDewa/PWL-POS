@@ -1,4 +1,5 @@
-@extends('layouts.template')
+@extends('layout.template')
+
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
@@ -9,20 +10,18 @@
         <form method="POST" action="{{ url('level') }}" class="form-horizontal">
             @csrf
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label">Level Kode</label>
+                <label class="col-1 control-label col-form-label">Kode</label>
                 <div class="col-11">
-                    <input type="text" class="form-control" id="level_kode" name="level_kode"
-                        value="{{ old('level_kode') }}" required>
+                    <input type="text" class="form-control" id="level_kode" name="level_kode" value="{{ old('level_kode') }}" required>
                     @error('level_kode')
                     <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label">Level Nama</label>
+                <label class="col-1 control-label col-form-label">Nama</label>
                 <div class="col-11">
-                    <input type="text" class="form-control" id="level_nama" name="level_nama"
-                        value="{{ old('level_nama') }}" required>
+                    <input type="text" class="form-control" id="level_nama" name="level_nama" value="{{ old('level_nama') }}" required>
                     @error('level_nama')
                     <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -39,7 +38,11 @@
     </div>
 </div>
 @endsection
+
 @push('css')
+<!-- Tambahkan CSS jika diperlukan -->
 @endpush
+
 @push('js')
+<!-- Tambahkan JS jika diperlukan -->
 @endpush
