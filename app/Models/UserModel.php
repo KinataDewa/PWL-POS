@@ -10,12 +10,18 @@ use Illuminate\Foundation\Auth\User;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-// class UserModel extends \Illuminate\Foundation\Auth\User
 class UserModel extends Authenticatable implements JWTSubject
 {
+    // use HasFactory;
+
+    protected $table = 'm_user';
+    protected $primaryKey = 'user_id';
+
+    protected $fillable = ['level_id', 'username', 'nama', 'password'];
+
     public function getJWTIdentifier()
     {
-        return $this->getkey();
+        return $this->getKey();
     }
 
     public function getJWTCustomClaims()
@@ -23,14 +29,6 @@ class UserModel extends Authenticatable implements JWTSubject
         return [];
     }
 
-    protected $table = 'm_user';
-    protected $primaryKey = 'user_id';
-    // use HasFactory;
-
-    // protected $table = 'm_user';
-    // protected $primaryKey = 'user_id';
-
-    protected $fillable = ['level_id', 'username', 'nama', 'password'];
 
     // public function level(): BelongsTo
     // {
@@ -46,4 +44,5 @@ class UserModel extends Authenticatable implements JWTSubject
     // {
     //     return $this->hasMany(TransaksiModel::class, 'user_id', 'user_id');
     // }
+
 }
